@@ -84,4 +84,12 @@ $ cd ../
 ```
 to access the parent directory.
 
+Now try
+
+```
+$ cat /home/linux/ieng6/cs15lsp23/public/hello.txt
+```
+
+This accesses the file hello.txt through its path "cat /home/linux/ieng6/cs15lsp23/public/hello.txt" and concatenates its contents. In this case, the only contents of the file should be "Hello World!"
+
 These are only some examples, feel free to try out more on your own!
