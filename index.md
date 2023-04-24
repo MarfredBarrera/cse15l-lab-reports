@@ -92,4 +92,10 @@ $ cat /home/linux/ieng6/cs15lsp23/public/hello.txt
 
 This accesses the file hello.txt through its path "cat /home/linux/ieng6/cs15lsp23/public/hello.txt" and concatenates its contents. In this case, the only contents of the file should be "Hello World!"
 
+Another command to try is 
+```
+$ cp /home/linux/ieng6/cs15lsp23/public/hello.txt ~/
+```
+This copies the file "hello.txt" using the path "/home/linux/ieng6/cs15lsp23/public/hello.txt" and stores it in your current directory.
+
 These are only some examples, feel free to try out more on your own!
