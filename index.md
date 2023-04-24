@@ -4,7 +4,7 @@ This lab report will describe how to remotely access a course-specific account o
 ## 1. Downloading VisualStudiocode
 
 VScode is an IDE that allows us to code in a more user friendly environment.
-Visit the VScode website to download VScode. Make sure to download the version of VScode specified for your system.
+Visit the VScode website to download [VSCode](https://code.visualstudio.com/download). Make sure to download the version of VScode specified for your system.
 
 <img src="vscodedownload.png" width="1200" height="600">
 
