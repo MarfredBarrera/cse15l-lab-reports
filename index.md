@@ -1,101 +1,136 @@
-#  **Lab Report 1**
-This lab report will describe how to remotely access a course-specific account on ieng6.
+# Lab Report 2
 
-## 1. Downloading VisualStudiocode
+## Part 1
 
-VScode is an IDE that allows us to code in a more user friendly environment.
-Visit the VScode website to download [VSCode](https://code.visualstudio.com/download). Make sure to download the version of VScode specified for your system.
+This is a file that sets up a server named StringServer:
 
-<img src="vscodedownload.png" width="1200" height="600">
+![StringServer.java](StringServer.png)
 
----
-Once VScode is downloaded, open it up and follow the prompts to set up your environment. If using Windows, make sure to download [Git](https://gitforwindows.org/) for Windows.
+The class StringServer sets up the server, and the class Handler decides what the server does with a URL handle.
 
-<img src="gitforwindows.png" width="1200" height="600">
 
----
-Once you are done setting up VScode, you can open a bash terminal to begin entering commands.
-1. go to the "Terminal" tab in the top left
-2. click on "New Terminal"
-3. click on the drop down arrow on the right of the terminal
-4. click on "Git Bash"
----
-Now your VScode terminal should look something like this.
+When you visit the website created by the server, you can enter prompts into the URL which are then used as arguments in the various methods of StringServer.java
 
-<img src="gitbashterminal.png" width="800" height="400">
+This is what my StringServer should look like when it first starts up:
 
----
+![local host without prompts](please_enter_string.png)
 
-## 2. Accessing your ieng account
-To find the information for your ieng account, find your course specific account on UCSD's ETS website. Enter your Last Name and Student ID to find your CSE 15L course user name.
+You can enter a string into the URL in the form /add-message?s=<insert string here>, and the string should appear on the screen
 
-<img src="accountlookup.png" width="1200" height="600">
+For example, adding
 
-Once you find your username, click on your CSE 15 username and use the Global Password Change Tool to reset your password.
+/add-message?s=Hello World 
 
-Once you confirm your password change, your account should be all set!
 
----
+results in the following:
 
-## 3. Remotely Connecting
-On your VScode terminal, enter the command 
+![](Hello_World.png)
+
+
+When using /add-message, the handleRequest method is called, using the entire URL as its argument.
+
+
+The handleRequest method detects if the phrase "/add-message" is in the URL, then splits the URL to find the query and the string to add. 
+
+With every server, the String str is instantiated with an empty string.
+
+
+The handleRequest method then concatenates str with everything after the "=" in the URL.
+
+If you enter another /add-message command into the URL, it should display your most recent string below the previous string.
+
+![](How_are_you.png)
+
+When we enter "How are you?" into the URL, it calls the handleRequest method again, using the entire URL as the argument once more.
+
+As before, the handleRequest method splits the URL into its path, query, and string to add. 
+
+Then, the string to add is concatenated with a new line operator "\n" along with str. 
+
+This stores both the current and all previous entries in the URL. 
+
+
+
+## Part 2
+
+This part of the lab report will analyze the buggy reversed(int[] arr) method:
+
+![](Buggy_reversed.png)
+
+
+
+Failure inducing input:
 ```
-$ ssh cs15lsp23zz@ieng6.ucsd.edu
-```
-
-replacing zz with the two letters in your own username. 
-
-You should then be prompted to enter your password, which is the password to the account that you just set up.
-
-Once you enter your password, you should see something like this on your terminal:
-
-<img src="remoteaccess.png" width="500" height="300">
-
-This means you have successfully remotely accessed your cse15l account!
-
----
-
-## 3. Trying Commands
-Now that you are logged in, time to start trying out commands.
-First, you can try the command
-```
-$ pwd
-```
-which should print your working directory.
-
-![](pwd.png)
-
-Next, you can try
-``` 
-$ ls
-```
-which should list the directories or files available in the working directory
-
-![](ls.png)
-
-Try the command
-```
-$ cd
-```
-and the name of a file or directory in order to access these files or directories, or you can use 
+@Test
+  public void testReversed4Elements() {
+    int[] input1 = {1,2,3,4};
+    int[] output1 = {4,3,2,1};
+    assertArrayEquals(output1, ArrayExamples.reversed(input1));
+  }
 
 ```
-$ cd ../
-```
-to access the parent directory.
 
-Now try
+The method does not correctly reverse an array sorted least to greatest.
 
-```
-$ cat /home/linux/ieng6/cs15lsp23/public/hello.txt
+
+Non-Failure inducing input:
+
 ```
 
-This accesses the file hello.txt through its path "cat /home/linux/ieng6/cs15lsp23/public/hello.txt" and concatenates its contents. In this case, the only contents of the file should be "Hello World!"
+  @Test
+  public void testReversed() {
+    int[] input1 = { };
+    assertArrayEquals(new int[]{ }, ArrayExamples.reversed(input1));
+  }
 
-Another command to try is 
-```
-$ cp /home/linux/ieng6/cs15lsp23/public/hello.txt ~/
-```
-This copies the file "hello.txt" using the path "/home/linux/ieng6/cs15lsp23/public/hello.txt" and stores it in your current directory.
+  ```
 
-These are only some examples, feel free to try out more on your own!
+The method can correctly deal with an empty array.
+
+
+Output of running the two tests:
+![](symptom.png)
+
+
+The reversed(int[] arr) method before any changes:
+
+```
+  static int[] reversed(int[] arr) {
+    int[] newArray = new int[arr.length];
+    for(int i = 0; i < arr.length; i += 1) {
+      arr[i] = newArray[arr.length - i - 1];
+    }
+    return arr;
+  }
+
+```
+
+The reversed() method with fixes:
+```
+static int[] reversed(int[] arr) {
+    int[] newArray = new int[arr.length];
+    for(int i = 0; i < arr.length; i += 1) {
+      newArray[i] = arr[arr.length - i - 1];
+    }
+    return newArray;
+  }
+```
+
+Previously, the reversed(int[] arr) had created a new Array called newArray, but it was setting values of the input array arr equal to values of the empty newArray with
+```
+arr[i] = newArray[arr.length - i - 1];
+```
+It would then return arr.
+
+Therefore, the array that is returned is simply an array of zeros.
+
+The fixed method changes the line of code specificed above to
+
+```
+newArray[i] = arr[arr.length - i - 1];
+```
+
+and now returns newArray. Now, the method correctly assigns the values of arr in a reversed order in a new array. 
+
+## Part 3
+During lab week 2, I learned the basics of how servers and URLs worked when I previously did not know much about the topic. For instance, I did not specifically how changes in the URL would send information to a server and make changes with it. With the week 2 lab activity, I was able to set up my own server running both on my local computer and remotely, and I experimented with changing the URL to create a String output.
