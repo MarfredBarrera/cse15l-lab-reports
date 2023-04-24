@@ -22,7 +22,7 @@ Once you are done setting up VScode, you can open a bash terminal to begin enter
 ---
 Now your VScode terminal should look something like this.
 
-<img src="gitbashterminal.png" width="600" height="300">
+<img src="gitbashterminal.png" width="800" height="400">
 
 ---
 
