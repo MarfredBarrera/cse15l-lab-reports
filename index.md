@@ -9,7 +9,7 @@ Visit the VScode website to download [VSCode](https://code.visualstudio.com/down
 <img src="vscodedownload.png" width="1200" height="600">
 
 ---
-Once VScode is downloaded, open it up and follow the prompts to set up your environment. If using Windows, make sure to download Git for Windows.
+Once VScode is downloaded, open it up and follow the prompts to set up your environment. If using Windows, make sure to download [Git](https://gitforwindows.org/) for Windows.
 
 <img src="gitforwindows.png" width="1200" height="600">
 
