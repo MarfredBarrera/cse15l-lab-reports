@@ -50,7 +50,7 @@ This option could be useful if you want to look for every instance of a word app
 
 2. ```grep -m [NUM] [PATTERN] [FILE]```
 
-The comman grep -m will count and print up to NUM lines matching the specified pattern. I found this using (https://en.wikibooks.org/wiki/Grep)
+The comman grep -m will count and print up to NUM lines matching the specified pattern. I found this using the ```grep --help``` command.
 
 Example using ./technical/government/Alcohol_Problems/Session4-PDF.txt
 ```
@@ -99,7 +99,7 @@ In this result, the first 20 lines that mention the string 'community' are shown
 
 3.  ```grep -c [PATTERN] [FILE]```
 
-The ```grep -c``` command will only print a count of how many matchin lines there are in a file.
+The ```grep -c``` command will only print a count of how many matchin lines there are in a file. I found this using (https://en.wikibooks.org/wiki/Grep)
 
 Here is an example using ./technical/biomed/1471-213X-3-4.txt
 
