@@ -17,11 +17,6 @@ Legal assistance for battered women is hard to come by. But it
 residents, who can access free legal aid locally from West Texas
 Legal Services.
 programs are the working poor, who don't qualify for free legal
-[cs15lsp23qz@ieng6-201]:Media:458$ grep -i "LEGAL" Helping_Hands.txt
-Legal assistance for battered women is hard to come by. But it
-residents, who can access free legal aid locally from West Texas
-Legal Services.
-programs are the working poor, who don't qualify for free legal
 ```
 You can see that the pattern ```grep``` is looking for is "LEGAL". The exact string "LEGAL" does not show up in a grep search without -i, but all uses of "LEGAL" in the file Helping_Hands.txt are shown with ```grep -i```
 
