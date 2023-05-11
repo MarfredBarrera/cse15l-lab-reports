@@ -4,7 +4,7 @@ This lab report will explore the possible uses of the ```grep``` command and its
 
 1. ```grep -i [PATTERN] [FILE]```
 
-This command line option ignores case distinctions
+This command line option ignores case distinctions. I found this using (https://en.wikibooks.org/wiki/Grep)
 
 Example using ./technical/government/Media/Helping_Hands.txt
 
