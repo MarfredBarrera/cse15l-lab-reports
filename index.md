@@ -127,7 +127,7 @@ Again, no lines are printed using grep -c, only the count of matching lines are 
 
 4. ``` grep -o [PATTERN] [FILE] ```
 
-```grep -o``` shows only the part of the line matching the pattern.
+```grep -o``` shows only the part of the line matching the pattern. I found this using (https://en.wikibooks.org/wiki/Grep)
 
 Here is an example using ./technical/911report/preface.txt
 
