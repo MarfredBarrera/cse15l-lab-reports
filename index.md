@@ -50,7 +50,7 @@ This option could be useful if you want to look for every instance of a word app
 
 2. ```grep -m [NUM] [PATTERN] [FILE]```
 
-The comman grep -m will count and print up to NUM lines matching the specified pattern
+The comman grep -m will count and print up to NUM lines matching the specified pattern. I found this using (https://en.wikibooks.org/wiki/Grep)
 
 Example using ./technical/government/Alcohol_Problems/Session4-PDF.txt
 ```
