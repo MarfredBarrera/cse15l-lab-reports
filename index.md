@@ -2,7 +2,7 @@
 
 This lab report will explore the possible uses of the ```grep``` command and its different command line options. By default, grep will search a given file for any uses of a given string and return the line where the string is found.
 
-1. ```grep -i [PATTERN] [FILE]```
+1.```grep -i [PATTERN] [FILE]```
 
 This command line option ignores case distinctions. I found this using (https://en.wikibooks.org/wiki/Grep)
 
@@ -43,7 +43,7 @@ other UM law alumni: Forest attorney Constance Slaughter-Harvey;
 Here, grep shows every line with the string 'law' without case distinction.
 This option could be useful if you want to look for every instance of a word appearing in a text file, including if the word is capitalized in the start of a sentence. 
 
-2. ```grep -m [NUM] [PATTERN] [FILE]```
+2.```grep -m [NUM] [PATTERN] [FILE]```
 
 The comman grep -m will count and print up to NUM lines matching the specified pattern. I found this using the ```grep --help``` command.
 
@@ -92,7 +92,7 @@ planners develop ways to involve more clients and community
 
 In this result, the first 20 lines that mention the string 'community' are shown. This could be useful if you want ```grep``` to stop looking for searches once you reach the amount of mentions you are interested in.
 
-3.  ```grep -c [PATTERN] [FILE]```
+3.```grep -c [PATTERN] [FILE]```
 
 The ```grep -c``` command will only print a count of how many matchin lines there are in a file. I found this using (https://en.wikibooks.org/wiki/Grep)
 
@@ -120,7 +120,7 @@ $ grep -c 'PBPK' 1471-2253-2-5.txt
 
 Again, no lines are printed using grep -c, only the count of matching lines are printed. This command would be useful if you want to quickly search for how many lines contain a specific string, even if it appears multiple times in a single line.
 
-4. ``` grep -o [PATTERN] [FILE] ```
+4.``` grep -o [PATTERN] [FILE] ```
 
 ```grep -o``` shows only the part of the line matching the pattern. I found this using (https://en.wikibooks.org/wiki/Grep)
 
