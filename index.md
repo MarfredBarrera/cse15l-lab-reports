@@ -3,19 +3,19 @@
 This lab report will detail the steps to cloning, editing, commiting, and pushing files using git and vim. We will be using the repository https://github.com/ucsd-cse15l-s23/lab7
 
 **SETUP:** 
-1. Delete any existing forks of the repository you have on your account.
+1: Delete any existing forks of the repository you have on your account.
 
  Visit your github and delete any existing forks of lab7 to start from scratch.
 
-2. Fork the repository
+2: Fork the repository
 
  You now have a fork of the repository in your own account. 
 
-3. Set up the timer!
+3: Set up the timer!
 
 **TASK:**
 
-4. Log into ieng6
+4: Log into ieng6
 
 Type:
 
@@ -27,7 +27,7 @@ You should now be logged into ieng6, and you do not need to enter your password 
 
 ![](ieng6.png)
 
-5. Clone your fork of the repository from your Github account
+5: Clone your fork of the repository from your Github account
 
 Type:
 
@@ -45,7 +45,7 @@ After cloning the repository, you should see this:
 ![](git_clone.png)
 
 
-6. Run the tests, demonstrating that they fail
+6: Run the tests, demonstrating that they fail
 
 Type:
 ```
@@ -74,7 +74,7 @@ This should show that 1 test fails:
 
 ![](tests_failed.png)
 
-7. Edit the code file to fix the failing test
+7: Edit the code file to fix the failing test
 
 We will be using vim to edit the file.
 
@@ -136,7 +136,7 @@ Pressing ```<:><w><q>``` saves your edits to the files and quits the file. You s
 Pressing ```<Enter>``` completes the ":wq" command and exits the file. 
 We have now editted the file using vim.
 
-8. Run the tests, demonstrating that they now succeed.
+8: Run the tests, demonstrating that they now succeed.
 
 You can use the ```<up arrow keys>``` to type the javac and java commands since they were recently used.
 I typed:
@@ -148,7 +148,7 @@ I typed:
 ![](correct_tests.png)
 
 
-9. Commit and push the resulting changes to your Github account.
+9: Commit and push the resulting changes to your Github account.
 
 Type:
 
