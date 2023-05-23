@@ -1,219 +1,170 @@
-# Lab Report 3
+# Lab Report 4 
 
-This lab report will explore the possible uses of the ```grep``` command and its different command line options. By default, grep will search a given file for any uses of a given string and return the line where the string is found.
+This lab report will detail the steps to cloning, editing, commiting, and pushing files using git and vim. We will be using the repository https://github.com/ucsd-cse15l-s23/lab7
 
-1.```grep -i [PATTERN] [FILE]```
+**SETUP:** 
+1. Delete any existing forks of the repository you have on your account.
 
-This command line option ignores case distinctions. I found this using (https://en.wikibooks.org/wiki/Grep)
+ Visit your github and delete any existing forks of lab7 to start from scratch.
 
-Example using ./technical/government/Media/Helping_Hands.txt
+2. Fork the repository
 
+ You now have a fork of the repository in your own account. 
+
+3. Set up the timer!
+
+**TASK:**
+
+4. Log into ieng6
+
+Type:
+
+``` ssh cs15lsp23qz@ieng6.ucsd.edu```
+
+```<Enter> ```
+
+You should now be logged into ieng6, and you do not need to enter your password if you have set up your ssh key.
+
+![](ieng6.png)
+
+5. Clone your fork of the repository from your Github account
+
+Type:
+
+``` git clone git@github.com:MarfredBarrera/lab7.git ```
+
+
+``` <Enter> ```
+
+You can get the ssh key from your github account here:
+
+![](ssh_key.png)
+
+After cloning the repository, you should see this:
+
+![](git_clone.png)
+
+
+6. Run the tests, demonstrating that they fail
+
+Type:
 ```
-$ grep -i "LEGAL" Helping_Hands.txt
+cd lab7 
 ```
-
 ```
-Legal assistance for battered women is hard to come by. But it
-residents, who can access free legal aid locally from West Texas
-Legal Services.
-programs are the working poor, who don't qualify for free legal
-```
-You can see that the pattern ```grep``` is looking for is "LEGAL". The exact string "LEGAL" does not show up in a grep search without -i, but all uses of "LEGAL" in the file Helping_Hands.txt are shown with ```grep -i```
-
-Here is another example using ./technical/government/Media/Ginny_Kilgore.txt
-
-```
-$ grep -i 'law' Ginny_Kilgore.txt
-```
-
-```
-University of Mississippi School of Law's 2002 Public Service
-Kilgore's honor and hosted by law school Dean Samuel M. Davis, who
-few years teaching, Kilgore enrolled at the UM law school. Upon
-graduation in 1975, she entered private law practice in Oxford,
-Since 1990, she has worked in the Administrative Law Unit and
-Resource Development, and directed the Elder Law Project, serving
-She also is an adjunct professor in the UM law school's Civil
-Law Clinic. She held a similar post a few years ago in the school's
-Elder Law Clinic.
-Mississippi Bar Association with its 2000 Legal Services Lawyer of
-Previous recipients of the law school's Public Service Award are
-other UM law alumni: Forest attorney Constance Slaughter-Harvey;
-```
-Here, grep shows every line with the string 'law' without case distinction.
-This option could be useful if you want to look for every instance of a word appearing in a text file, including if the word is capitalized in the start of a sentence. 
-
-2.```grep -m [NUM] [PATTERN] [FILE]```
-
-The comman grep -m will count and print up to NUM lines matching the specified pattern. I found this using the ```grep --help``` command.
-
-Example using ./technical/government/Alcohol_Problems/Session4-PDF.txt
-```
-$ grep -m 5 'alcohol' Session4-PDF.txt
-```
-
-```
-Individuals who may benefit from alcohol counseling are often
-unaware of their need for treatment. The provision of alcohol
-more intractable stages of alcoholism. Finally, such interventions
-As proven alcohol interventions emerge, a systematic effort is
-that have limited the provision of alcohol intervention and
-```
-
-Here, the first 5 lines that contain the string 'alcohol' are shown. This could be useful to find the first few occurances of a string in a file.
-
-Here is another examples using ./technical/government/About_LSC/State_Planning_Report.txt
-```
-$ grep -m 20 'community' State_Planning_Report.txt
+<Enter>
 ```
 
 ```
-building of the community is directed--the creation and maintenance
-in every state of a "state justice community" collaborating on the
-This Report describes progress that the legal services community
-building a justice community capable of responding to the full
-process. In a few states, a fully developed state justice community
-developed key justice community institutions whose significant
-increase the capacities of three community-based organizations.
-with an active period within California's justice community. The
-community. The first priority of the Commission was resource
-services community, but despite signs of chronic weakness in two
-assistance to the low-income community throughout the
-in the state justice community in Colorado has always been
-coordinated state justice community in Colorado.
-programs. The results were reported to the equal justice community
-internet access to community education materials beyond the current
-community education site for immigrant advocacy organizations.
-region, to be developed in 2001. A region-wide community economic
-community, social service agencies, government agencies, civil
-government agencies and community leaders to promote holistic,
-planners develop ways to involve more clients and community
+javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java
+```
+```
+<Enter>
+```
+```
+java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore ListExamplesTests.java
+```
+```
+<Enter>
 ```
 
-In this result, the first 20 lines that mention the string 'community' are shown. This could be useful if you want ```grep``` to stop looking for searches once you reach the amount of mentions you are interested in.
+If you had previously run these commands, you can access these commands in your history using the key ```<up arrow>``` and ```<Enter>```. 
 
-3.```grep -c [PATTERN] [FILE]```
+This should show that 1 test fails:
 
-The ```grep -c``` command will only print a count of how many matchin lines there are in a file. I found this using (https://en.wikibooks.org/wiki/Grep)
+![](tests_failed.png)
 
-Here is an example using ./technical/biomed/1471-213X-3-4.txt
+7. Edit the code file to fix the failing test
 
-```
-$ grep -c 'RNA' 1471-213X-3-4.txt
-```
+We will be using vim to edit the file.
 
-``` 
-16
-```
+Type:
 
-As seen, grep -c does not print the matching lines themselves, only the number of lines that match the specified pattern. In file 1471-213X-3-4.txt, there are 16 lines that mention 'RNA'. 
+``` vim Li <Tab> .java ```
 
-Here is another example of ``` grep -c ``` using ./technical/biomed/1471-2253-2-5.txt
+Pressing tab will autofill ListExamples into the command line.
 
-```
-$ grep -c 'PBPK' 1471-2253-2-5.txt
-```
+![](vim_command_line.png)
 
-```
-35
-```
+```<Enter>```
 
-Again, no lines are printed using grep -c, only the count of matching lines are printed. This command would be useful if you want to quickly search for how many lines contain a specific string, even if it appears multiple times in a single line.
+You should now be viewing the contents of ListExamples.java using vim.
 
-4.``` grep -o [PATTERN] [FILE] ```
+![](vim_screen.png)
 
-```grep -o``` shows only the part of the line matching the pattern. I found this using (https://en.wikibooks.org/wiki/Grep)
 
-Here is an example using ./technical/911report/preface.txt
 
-```
-$ grep -o 'United States' preface.txt
-```
+Type:
 
-```
-United States
-United States
-United States
-United States
-```
+``` <Shift + /> <1> <Enter> <n> <r> <2> <:><w><q> <Enter>```
 
-Here, ```grep -o``` shows only the parts of the file matching the specified pattern. However, this includes when the pattern occurs multiple times in one line. For example,
+Shift enter will activate search mode. 
+You should see a question mark pop up in the bottom left corner when entering seach mode.
+![](Shift.png)
 
-```
-$ grep -c 'United States' preface.txt
-```
+Pressing ```<1> ``` means that vim will search for instances of "1" in the file. 
 
-returns
-```
-3
-```
-because the string 'United States' appears in 3 lines. However, grep -o will show 4 instances of 'United States' because the pattern is mentioned twice in one line.
-This could be used to count the total amount of times a pattern appears in a file.
+![](1.png)
 
-Here is another examples using ./technical/911report/chapter-1.txt
-```
-$ grep -o 'NORAD' chapter-1.txt
-```
+We use ```<Shift+/```> as opposed to a normal search using ```/``` because it will scan the entire file and leave the cursor at the last instance of "1" it finds. 
 
-```
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-NORAD
-```
+In this case, the last instance of "1" in the file is on the same line as the instance of "1" that we want to change.
 
-Here, the pattern 'NORAD' is found within chapter-1.txt many times. This would be a useful instance of using grep -o in conjunction with another command like grep -c or wc to quickly count the total amount of instances of a specific pattern inside a file.
+Pressing ```<Enter>``` completes the search command.
+
+![](Enter.png)
+
+Pressing ```<n>``` will cyle through all the matches of the search command. In this case, we only have to press ```<n>``` once to get the character that we want to edit.
+
+![](n.png)
+
+Pressing ```<r>``` activates the "replace" command, which will replace the highlighted character with the next character entered. You should see an "r" pop up in the bottom left corner, indicating you are using the "replace" command.
+
+![](r.png)
+
+
+Pressing ```<2>``` uses the replace command to replace the "1" with a "2".
+
+![](2.png)
+
+Press ```<Enter>``` to complete the command.
+
+Pressing ```<:><w><q>``` saves your edits to the files and quits the file. You should see these characters in the bottom left corner.
+
+![](wq.png)
+
+Pressing ```<Enter>``` completes the ":wq" command and exits the file. 
+We have now editted the file using vim.
+
+8. Run the tests, demonstrating that they now succeed.
+
+You can use the ```<up arrow keys>``` to type the javac and java commands since they were recently used.
+I typed:
+
+```<up> <up> <up> <Enter>``` to run ```javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java```
+
+```<up> <up> <up> <Enter> ``` to run ```java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore ListExamplesTests```
+
+![](correct_tests.png)
+
+
+9. Commit and push the resulting changes to your Github account.
+
+Type:
+
+``` git commit -m "fixed index bug" List<Tab>```
+```<Enter>```
+
+This commits the changes we made to ListExamples.java to the Github branch.
+Pressing Tab autofills ListExamples.java. 
+
+![](git_commit.png)
+
+``` git push git@github.com:MarfredBarrera/lab7.git```
+
+This pushes our changes to our Github account using our ssh key. 
+
+![](git_push.png)
+
+
+
