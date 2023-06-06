@@ -1,170 +1,99 @@
-# Lab Report 4 
+# Lab Report 5
 
-This lab report will detail the steps to cloning, editing, commiting, and pushing files using git and vim. We will be using the repository https://github.com/ucsd-cse15l-s23/lab7
+## Part 1
 
-**SETUP:** 
-1: Delete any existing forks of the repository you have on your account.
+1. 
+Hello, I am having some trouble runningn my grading script that I worked on for lab 6. Currently, I am using a Windows operating system and using VScode for my terminal and editor. For the symptom, whenever I run 
 
- Visit your github and delete any existing forks of lab7 to start from scratch.
+``` bash grade.sh https://github.com/ucsd-cse15l-f22/list-methods-corrected``` 
 
-2: Fork the repository
+the following error message is shown on my terminal:
 
- You now have a fork of the repository in your own account. 
-
-3: Set up the timer!
-
-**TASK:**
-
-4: Log into ieng6
-
-Type:
-
-``` ssh cs15lsp23qz@ieng6.ucsd.edu```
-
-```<Enter> ```
-
-You should now be logged into ieng6, and you do not need to enter your password if you have set up your ssh key.
-
-![](ieng6.png)
-
-5: Clone your fork of the repository from your Github account
-
-Type:
-
-``` git clone git@github.com:MarfredBarrera/lab7.git ```
+![](error_message.png)
 
 
-``` <Enter> ```
+My bash script is shown here:
 
-You can get the ssh key from your github account here:
+![](bash_script.png)
 
-![](ssh_key.png)
+Since I am grading the corrected version of the list methods, I expect the grader and all tester methods to compile and run correctly with no failed tests.
 
-After cloning the repository, you should see this:
+The error message shows that the bash script runs correctly until the line 
 
-![](git_clone.png)
+```javac -cp $CPATH *.java```
+
+where it then fails to compile TestListExamples.java
+
+My working directory shows that I am in the correct directory to run   ```javac``` commands, and I have not changed any of the original code already provided by the files from Github. I am not sure what else could be causing the error. Is it a problem with the ListExamplesTests.java file? Or might there be a problem with the use of ```*.java```? Any help is appreciated!
 
 
-6: Run the tests, demonstrating that they fail
+2. 
+Hello, you have already narrowed down the search for the bug quite a bit. The problem does seem to originate from ```javac -cp $CPATH *.java```, and the use of ```*.java``` is appropriate and should not be causing the error. To compile JUnit testers, you may use the commands we have provided you in previous lab descriptions and make sure they match exactly with what you have for CPATH. 
 
-Type:
+3. 
+I looked at the javac command for JUNIT testing in lab 3, and I replaced what was in CPATH with 
+```".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar"```
+and it successfully compiled! Turns out, the file from Github uses the javac commands for Mac users as default, and I had to change the command to the javac commands for Windows. Now that I am correctly compiling JUNIT, my testers and grading script should all work as intended.
+
+
+4. 
+To set up the bug, we must use the Github repository https://github.com/ucsd-cse15l-s23/list-examples-grader.
+Here, the working directory must be in list-examples-grader/. When the ls command is used, the grading-area/, lib/, and student-submission/ directories should be visible as well as the file grade.sh, Server.java, GradeServer.java, and TestListExamples.java
+
+Before fixing the bugs, the contents of grade.sh should be as shown:
 ```
-cd lab7 
+CPATH= '.:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
+rm -rf student-submission
+rm -rf grading-area
+
+mkdir grading-area
+
+git clone $1 student-submission
+echo 'Finished cloning'
+
+
+path="student-submission/ListExamples.java";
+
+if [[ -f "$path" ]];
+then
+    echo "ListExamples.java found"
+else
+    echo "ListExamples.java not found. Here are the files we see: "
+    ls student-submission
+    exit
+fi
+
+to_path="grading-area"
+cp -r "$path" "TestListExamples.java" "lib" "$to_path"
+cd grading-area
+javac -cp $CPATH *.java
+
+if [[ $? = 1 ]]; 
+then
+    echo "Compile failed! See above for error message"
+    exit
+else
+    echo "Compiled successfully!"
+fi
 ```
-```
-<Enter>
-```
 
+All other files from the repository should remain as they were.
+
+The full command to trigger the bug is
+
+```bash grade.sh https://github.com/ucsd-cse15l-f22/list-methods-corrected``` 
+
+
+To fix the bug, change the line that defines CPATH as 
 ```
-javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java
-```
-```
-<Enter>
-```
-```
-java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore ListExamplesTests.java
-```
-```
-<Enter>
+CPATH= '.:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar'
 ```
 
-If you had previously run these commands, you can access these commands in your history using the key ```<up arrow>``` and ```<Enter>```. 
+to 
 
-This should show that 1 test fails:
+```
+CPATH= ".;lib/hamcrest-core-1.3.jar;lib/junit-4.13.2.jar"
+```
 
-![](tests_failed.png)
-
-7: Edit the code file to fix the failing test
-
-We will be using vim to edit the file.
-
-Type:
-
-``` vim Li <Tab> .java ```
-
-Pressing tab will autofill ListExamples into the command line.
-
-![](vim_command_line.png)
-
-```<Enter>```
-
-You should now be viewing the contents of ListExamples.java using vim.
-
-![](vim_screen.png)
-
-
-
-Type:
-
-``` <Shift + /> <1> <Enter> <n> <r> <2> <:><w><q> <Enter>```
-
-Shift enter will activate search mode. 
-You should see a question mark pop up in the bottom left corner when entering seach mode.
-![](Shift.png)
-
-Pressing ```<1> ``` means that vim will search for instances of "1" in the file. 
-
-![](1.png)
-
-We use ```<Shift+/```> as opposed to a normal search using ```/``` because it will scan the entire file and leave the cursor at the last instance of "1" it finds. 
-
-In this case, the last instance of "1" in the file is on the same line as the instance of "1" that we want to change.
-
-Pressing ```<Enter>``` completes the search command.
-
-![](Enter.png)
-
-Pressing ```<n>``` will cyle through all the matches of the search command. In this case, we only have to press ```<n>``` once to get the character that we want to edit.
-
-![](n.png)
-
-Pressing ```<r>``` activates the "replace" command, which will replace the highlighted character with the next character entered. You should see an "r" pop up in the bottom left corner, indicating you are using the "replace" command.
-
-![](r.png)
-
-
-Pressing ```<2>``` uses the replace command to replace the "1" with a "2".
-
-![](2.png)
-
-Press ```<Enter>``` to complete the command.
-
-Pressing ```<:><w><q>``` saves your edits to the files and quits the file. You should see these characters in the bottom left corner.
-
-![](wq.png)
-
-Pressing ```<Enter>``` completes the ":wq" command and exits the file. 
-We have now editted the file using vim.
-
-8: Run the tests, demonstrating that they now succeed.
-
-You can use the ```<up arrow keys>``` to type the javac and java commands since they were recently used.
-I typed:
-
-```<up> <up> <up> <Enter>``` to run ```javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java```
-
-```<up> <up> <up> <Enter> ``` to run ```java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore ListExamplesTests```
-
-![](correct_tests.png)
-
-
-9: Commit and push the resulting changes to your Github account.
-
-Type:
-
-``` git commit -m "fixed index bug" List<Tab>```
-```<Enter>```
-
-This commits the changes we made to ListExamples.java to the Github branch.
-Pressing Tab autofills ListExamples.java. 
-
-![](git_commit.png)
-
-``` git push git@github.com:MarfredBarrera/lab7.git```
-
-This pushes our changes to our Github account using our ssh key. 
-
-![](git_push.png)
-
-
-
+## Part 2
+Something I learned about in this class that I did not know before was how to use vim to as a text editor. Until then, I had exclusively used VScode for all coding, and I did not know that text editors like vim existed. Just from the small parts of vim we explored in this class, I can see how vim could be extremely efficient once at a proficient level. In fact, shortly after being introduced to what vim was, I overheard someone in the library explaining how they used vim to write essays. From what I know, it looks like a very interesting and useful tool, and perhaps someday I can reach a level of comfort with vim to improve my editting efficiency as well.
